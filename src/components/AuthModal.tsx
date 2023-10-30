@@ -12,6 +12,7 @@ type ToggleModal = {
 };
 
 const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
+  const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
@@ -29,7 +30,7 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
         return;
       }
     } else {
-      const { error } = await signup(email, password);
+      const { error } = await signup(name, email, password);
 
       if (error) {
         console.log(error);
@@ -48,6 +49,12 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
         <h3>{isLogin ? "LogIn" : "Sign Up"}</h3>
         {/* <FirebaseAuthUI /> */}
         <form onSubmit={handleForm}>
+          {!isLogin && (
+            <label htmlFor="name">
+              <span>Display Name </span>
+              <input onChange={(e) => setName(e.target.value.trim())} type="text" name="name" id="name" placeholder="Example Name" required />
+            </label>
+          )}
           <label htmlFor="email">
             <span>Email </span>
             <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" placeholder="example@gmail.com" required />

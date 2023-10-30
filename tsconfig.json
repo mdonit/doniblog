@@ -23,6 +23,7 @@
       "@/components/*": ["./src/components/*"],
       "@/firebase/*": ["./src/firebase/*"],
       "@/styles/*": ["./src/styles/*"],
+      "@/types/*": ["./src/types/*"],
       "@/hooks/*": ["./src/hooks/*"]
     }
   },

@@ -1,5 +1,6 @@
 import { collection, addDoc, getDocs, deleteDoc, updateDoc, doc } from "firebase/firestore";
 import { fireStoreDb } from "./config";
+import { v4 } from "uuid";
 
 const collectionPath = "questions";
 
@@ -16,18 +17,21 @@ export const addToQuestions = async (name: string, newQuestion: string) => {
 export const addCommentToQuestion = async (questionId: string, name: string, newComment: string[]) => {
   const querySnapshot = await getDocs(collection(fireStoreDb, collectionPath));
   let existingId = "";
+  let comments: UserComment[] = [];
 
   querySnapshot.forEach((doc) => {
     if (doc.id === questionId) {
-      existingId === doc.id;
+      existingId = doc.id;
+      comments = doc.data().comments;
       return;
     }
   });
 
-  const uploadComment: UserComment = { displayName: name, comment: newComment };
+  comments.push({ id: v4(), displayName: name, comment: newComment });
 
   const questionRef = doc(fireStoreDb, collectionPath, existingId);
-  await updateDoc(questionRef, { comments: [{ ...uploadComment }] });
+
+  await updateDoc(questionRef, { comments: comments });
 };
 
 export const deleteFromQuestions = async (id: string) => {

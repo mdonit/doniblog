@@ -26,14 +26,15 @@ main {
 }
 
 footer {
-  position: absolute;
+  /* position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 0; */
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 5rem;
+  margin-top: 5rem;
   padding: 1rem;
   background-color: rgb(31, 23, 36);
   color: rgb(225, 204, 236);

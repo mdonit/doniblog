@@ -15,10 +15,21 @@ ul {
   list-style: none;
 }
 
+textarea {
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
 body {
-  min-height: 100vh; /*100% is better for mobile*/
+  /*100% is better for mobile*/
+  /* min-height: 100vh; 
+  display: flex;
+  flex-direction: column; */
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 }
 
 main {
@@ -33,9 +44,9 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 5rem;
+  /* height: 5rem; */
   margin-top: 5rem;
-  padding: 1rem;
+  padding: 2rem;
   background-color: rgb(31, 23, 36);
   color: rgb(225, 204, 236);
 }

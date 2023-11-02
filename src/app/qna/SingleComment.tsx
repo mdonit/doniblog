@@ -7,31 +7,24 @@ type CommentProps = {
 };
 
 const SingleComment = ({ postComment, questionId, userLoggedIn }: CommentProps) => {
-  const [comment, setComment] = useState<string[]>([]);
+  const [comment, setComment] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
-    postComment(e, comment, questionId);
-    setComment([""]);
+    const formatedComment: string[] = comment.trim().split("\n");
+
+    postComment(e, formatedComment, questionId);
+    setComment("");
   };
 
   return (
     <form onSubmit={handleSubmit}>
       {userLoggedIn ? (
         <>
-          <textarea
-            name="comment"
-            cols={40}
-            rows={3}
-            placeholder="Leave a comment..."
-            onChange={(e) => {
-              setComment(e.target.value.trim().split("\n"));
-            }}
-            value={comment}
-          />
+          <textarea name="comment" cols={33} rows={3} placeholder="Leave a comment..." onChange={(e) => setComment(e.target.value)} value={comment} />
           <button type="submit">Submit</button>
         </>
       ) : (
-        <textarea name="comment" cols={40} rows={3} placeholder="Sign in to leave a comment..." disabled />
+        <textarea name="comment" cols={33} rows={3} placeholder="Sign in to leave a comment..." disabled />
       )}
     </form>
   );

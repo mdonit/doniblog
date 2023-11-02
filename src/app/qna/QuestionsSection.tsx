@@ -1,10 +1,12 @@
-import { useCollection, useCollectionData } from "react-firebase-hooks/firestore";
+import { useCollection } from "react-firebase-hooks/firestore";
 import SingleComment from "./SingleComment";
 import { useGetQuestions } from "@/hooks/useGetQuestions";
 import { useGetUser } from "@/hooks/useGetUser";
 import { addCommentToQuestion } from "@/firebase/questions";
 import { collection, getFirestore } from "firebase/firestore";
 import { app } from "@/firebase/config";
+import { Fragment } from "react";
+import styles from "@/styles/comments.module.css";
 
 export const QuestionsSection = ({ userLoggedIn }: { userLoggedIn: boolean }) => {
   const [value, loading, error] = useCollection(collection(getFirestore(app), "questions"), {
@@ -33,7 +35,16 @@ export const QuestionsSection = ({ userLoggedIn }: { userLoggedIn: boolean }) =>
             <ul>
               {qu.data().comments.map((co: UserComment) => (
                 <li key={co.id}>
-                  <p>Comment:{co.comment}</p>
+                  <div className={styles.comment}>
+                    <p>
+                      {co.comment.map((c, idx) => (
+                        <Fragment key={`${c}${idx}`}>
+                          {c}
+                          {idx < co.comment.length - 1 && <br />}
+                        </Fragment>
+                      ))}
+                    </p>
+                  </div>
                   <p style={{ fontSize: "13px" }}>by: {co.displayName}</p>
                 </li>
               ))}

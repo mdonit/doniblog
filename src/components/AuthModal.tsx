@@ -1,10 +1,9 @@
 "use client";
-// import { FirebaseAuthUI } from "./firebase-auth-ui";
 import { signin } from "@/firebase/auth/signin";
 import { signup } from "@/firebase/auth/signup";
 import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import styles from "@/styles/auth.module.css";
+import styles from "@/styles/modal.module.css";
 
 type ToggleModal = {
   toggleModal: () => void;
@@ -25,7 +24,7 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
       const { error } = await signin(email, password);
 
       if (error) {
-        console.log(error, "ROSSZ BEJELENTKEZÉS");
+        console.log(error, "Login Failed.");
 
         return;
       }
@@ -47,7 +46,6 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
     <div className={styles.modal}>
       <div className={styles.form}>
         <h3>{isLogin ? "LogIn" : "Sign Up"}</h3>
-        {/* <FirebaseAuthUI /> */}
         <form onSubmit={handleForm}>
           {!isLogin && (
             <label htmlFor="name">

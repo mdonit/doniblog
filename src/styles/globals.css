@@ -22,29 +22,23 @@ textarea {
 }
 
 body {
-  /*100% is better for mobile*/
-  /* min-height: 100vh; 
-  display: flex;
-  flex-direction: column; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+  background-color: rgb(231, 222, 231);
 }
 
 main {
-  padding: 5rem; /*padding bottom same as footer height */
+  margin-top: 5rem;
+  padding: 5rem; /*padding bottom same as footer margin-top */
 }
 
 footer {
-  /* position: absolute;
-  left: 0;
-  bottom: 0; */
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* height: 5rem; */
   margin-top: 5rem;
   padding: 2rem;
   background-color: rgb(31, 23, 36);

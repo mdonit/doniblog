@@ -6,6 +6,10 @@
 }
 
 .nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   padding: 1rem 2rem;
   justify-content: space-between;
   font-size: 1.2rem;
@@ -52,4 +56,16 @@
   bottom: 0;
   left: 0;
   background-color: rgb(200, 146, 230);
+}
+
+.pfp {
+  border-radius: 50%;
+}
+
+.authButtons div {
+  display: flex;
+  gap: 1.2rem;
+}
+.authButtons div span {
+  cursor: pointer;
 }

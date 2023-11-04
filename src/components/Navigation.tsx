@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AuthModal from "./AuthModal";
 import styles from "@/styles/nav.module.css";
+import Image from "next/image";
 
 const Navigation = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -21,7 +22,9 @@ const Navigation = () => {
     <>
       {modalVisible && <AuthModal toggleModal={toggleModal} isLogin={isLogin} />}
       <nav className={styles.nav}>
-        <div>Logo</div>
+        <div>
+          <Image priority src="/den.jpg" alt="me" width="50" height="50" className={styles.pfp} draggable="false" onContextMenu={(e) => e.preventDefault()} />
+        </div>
         <ul>
           <li className={`link ${pathname === "/" ? styles.active : ""}`}>
             <Link href="/">Home</Link>
@@ -36,7 +39,7 @@ const Navigation = () => {
             <Link href="/qna">Q&A</Link>
           </li>
         </ul>
-        <div>
+        <div className={styles.authButtons}>
           <AuthOptions toggleModal={toggleModal} />
         </div>
       </nav>

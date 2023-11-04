@@ -30,7 +30,7 @@ const AuthOptions = ({ toggleModal }: ToggleModal) => {
         </div>
       ) : (
         <div>
-          <span onClick={() => toggleModal(false)}>Sign Up | </span>
+          <span onClick={() => toggleModal(false)}>Sign Up</span>
           <span onClick={() => toggleModal(true)}>Log in</span>
         </div>
       )}

@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navigation from "@/components/Navigation";
+import FooterContent from "@/components/FooterContent";
 import { AuthContextProvider } from "@/context/AuthContext";
 import "@/styles/globals.css";
 
@@ -24,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main>{children}</main>
 
           <footer>
-            <p>FOOTER</p>
+            <FooterContent />
           </footer>
         </AuthContextProvider>
       </body>

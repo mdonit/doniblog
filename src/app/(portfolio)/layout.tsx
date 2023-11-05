@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function PortfolioLayout({ children }: { children: React.ReactNode }) {
   return (
     <section>
-      <h1>Portfolio (categories) Layout</h1>
+      <h1>Portfolio</h1>
       {children}
     </section>
   );

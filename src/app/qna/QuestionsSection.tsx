@@ -23,13 +23,12 @@ export const QuestionsSection = ({ userLoggedIn }: { userLoggedIn: boolean }) =>
   };
 
   return (
-    <div>
+    <div className={styles.questionList}>
       {error && <strong>Error: {JSON.stringify(error)}</strong>}
       {loading && <span>Collection: Loading...</span>}
       {value &&
         value.docs.map((qu) => (
-          <div key={qu.id}>
-            <br />
+          <div key={qu.id} className={styles.questionCard}>
             <h3>Question: {qu.data().question}</h3>
             <h4>by {qu.data().displayName}</h4>
             <ul>
@@ -44,8 +43,8 @@ export const QuestionsSection = ({ userLoggedIn }: { userLoggedIn: boolean }) =>
                         </Fragment>
                       ))}
                     </p>
+                    <p style={{ fontSize: "13px", textAlign: "right" }}>by {co.displayName}</p>
                   </div>
-                  <p style={{ fontSize: "13px" }}>by: {co.displayName}</p>
                 </li>
               ))}
             </ul>

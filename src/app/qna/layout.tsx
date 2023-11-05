@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function QnaLayout({ children }: { children: React.ReactNode }) {
   return (
     <section>
-      <div>Q&A Layout</div>
+      <h1>Q&A</h1>
       {children}
     </section>
   );

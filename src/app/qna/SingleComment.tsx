@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "@/styles/comments.module.css";
 
 type CommentProps = {
   postComment: (e: React.FormEvent, comment: string[], id: string | undefined) => void;
@@ -17,7 +18,7 @@ const SingleComment = ({ postComment, questionId, userLoggedIn }: CommentProps) 
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.commentInputHolder}>
       {userLoggedIn ? (
         <>
           <textarea name="comment" cols={33} rows={3} placeholder="Leave a comment..." onChange={(e) => setComment(e.target.value)} value={comment} />

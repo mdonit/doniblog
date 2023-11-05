@@ -8,7 +8,7 @@ const FooterContent = () => {
         <span>Made with Next.js</span>
         <span> | </span>
         <span>
-          <a href="https://github.com/mdonit/doniblog" target="_blank">
+          <a href="https://github.com/mdonit/doniblog" target="_blank" className={styles.footer_link}>
             Github Link
           </a>
         </span>

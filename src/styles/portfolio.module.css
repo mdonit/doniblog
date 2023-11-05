@@ -1,13 +1,60 @@
 .cardList {
   display: grid;
-  justify-content: center;
+  justify-items: center;
+  text-align: center;
   grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-top: 5rem;
 }
 
 .card {
+  width: 264px;
+  background-color: rgb(203, 194, 212);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.card_body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+.card_tech {
+  color: rgb(86, 77, 94);
+}
+.card_links {
+  position: absolute;
+  bottom: 6px;
   display: flex;
   flex-direction: column;
-  background-color: beige;
+  margin-top: 1rem;
+  gap: 0.4rem;
+  color: rgb(128, 77, 190);
+  font-weight: bold;
+}
+
+.card_links a {
+  position: relative;
+}
+.card_links a::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: -3px;
+  left: 0;
+  background-color: rgb(84, 68, 100);
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out;
+}
+.card_links a:hover::before {
+  visibility: visible;
+  transform: scaleX(1);
+  background-color: rgb(163, 55, 221);
 }
 
 @media (max-width: 1024px) {

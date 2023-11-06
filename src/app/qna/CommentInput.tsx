@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "@/styles/comments.module.css";
+import styles from "@/styles/qna.module.css";
 
 type CommentProps = {
   postComment: (e: React.FormEvent, comment: string[], id: string | undefined) => void;
@@ -7,7 +7,7 @@ type CommentProps = {
   userLoggedIn: boolean;
 };
 
-const SingleComment = ({ postComment, questionId, userLoggedIn }: CommentProps) => {
+const CommentInput = ({ postComment, questionId, userLoggedIn }: CommentProps) => {
   const [comment, setComment] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -18,7 +18,7 @@ const SingleComment = ({ postComment, questionId, userLoggedIn }: CommentProps) 
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.commentInputHolder}>
+    <form onSubmit={handleSubmit} className={styles["comment-input"]}>
       {userLoggedIn ? (
         <>
           <textarea name="comment" cols={33} rows={3} placeholder="Leave a comment..." onChange={(e) => setComment(e.target.value)} value={comment} />
@@ -31,4 +31,4 @@ const SingleComment = ({ postComment, questionId, userLoggedIn }: CommentProps) 
   );
 };
 
-export default SingleComment;
+export default CommentInput;

@@ -44,8 +44,8 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
 
   return (
     <div className={styles.modal}>
-      <div className={styles.form}>
-        <h3>{isLogin ? "LogIn" : "Sign Up"}</h3>
+      <div className={`${styles.form} ${styles["form--auth"]}`}>
+        <h3>{isLogin ? "Login" : "Sign Up"}</h3>
         <form onSubmit={handleForm}>
           {!isLogin && (
             <label htmlFor="name">
@@ -61,10 +61,11 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
             <span>Password </span>
             <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" placeholder="password" required />
           </label>
-          <button type="submit">{isLogin ? "Log In" : "Sign Up"}</button>
-          <br />
+          <div className={`${styles["form__buttons"]} ${styles["form__buttons--auth"]}`}>
+            <button type="submit">{isLogin ? "Log In" : "Sign Up"}</button>
+            <button onClick={toggleModal}>Cancel</button>
+          </div>
         </form>
-        <button onClick={toggleModal}>Cancel</button>
       </div>
     </div>
   );

@@ -10,12 +10,12 @@ type ConfirmWindow = {
 const ConfirmModal = ({ text, func, toggleConfirmModal }: ConfirmWindow) => {
   return (
     <div className={styles.modal}>
-      <div className={styles.form}>
+      <div className={`${styles.form} ${styles["form--confirm"]}`}>
         <h3>Confirmation</h3>
         <div>
           <p>Are you sure you want to {text}?</p>
         </div>
-        <div>
+        <div className={styles["form__buttons"]}>
           <button onClick={func}>Yes</button>
           <button onClick={toggleConfirmModal}>Cancel</button>
         </div>

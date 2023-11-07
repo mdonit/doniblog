@@ -5,25 +5,27 @@ import ConfirmModal from "./ConfirmModal";
 import styles from "@/styles/nav.module.css";
 
 type ToggleModal = {
-  toggleModal: (login?: boolean) => void;
+  // toggleModal: (login?: boolean) => void;
+  toggleAuthModal: (login?: boolean) => void;
+  toggleConfirmModal: () => void;
 };
 
-const AuthOptions = ({ toggleModal }: ToggleModal) => {
+const AuthOptions = ({ toggleAuthModal, toggleConfirmModal }: ToggleModal) => {
   const authUser = useGetUser();
-  const [toggleConfirm, setToggleConfirm] = useState<boolean>(false);
+  // const [toggleConfirm, setToggleConfirm] = useState<boolean>(false);
 
-  const userSignOut = () => {
-    signout();
-    setToggleConfirm(false);
-  };
+  // const userSignOut = () => {
+  //   signout();
+  //   setToggleConfirm(false);
+  // };
 
-  const toggleConfirmModal = () => {
-    setToggleConfirm((prev) => !prev);
-  };
+  // const toggleConfirmModal = () => {
+  //   setToggleConfirm((prev) => !prev);
+  // };
 
   return (
     <>
-      {toggleConfirm && <ConfirmModal text={"sign out"} func={userSignOut} toggleConfirmModal={toggleConfirmModal} />}
+      {/* {toggleConfirm && <ConfirmModal text={"sign out"} func={userSignOut} toggleConfirmModal={toggleConfirmModal} />} */}
       {authUser.loggedIn ? (
         <div>
           <span>{authUser.user?.displayName}</span>
@@ -33,10 +35,10 @@ const AuthOptions = ({ toggleModal }: ToggleModal) => {
         </div>
       ) : (
         <div>
-          <span className={styles.authButton} onClick={() => toggleModal(false)}>
+          <span className={styles.authButton} onClick={() => toggleAuthModal(false)}>
             Sign Up
           </span>
-          <span className={styles.authButton} onClick={() => toggleModal(true)}>
+          <span className={styles.authButton} onClick={() => toggleAuthModal(true)}>
             Log in
           </span>
         </div>

@@ -30,8 +30,10 @@ body {
 }
 
 main {
+  position: relative;
   margin-top: 5rem;
   padding: 5rem; /*padding bottom same as footer margin-top */
+  z-index: 0;
 }
 
 footer {

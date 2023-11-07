@@ -22,7 +22,7 @@ const CommentInput = ({ postComment, questionId, userLoggedIn }: CommentProps) =
       {userLoggedIn ? (
         <>
           <textarea name="comment" cols={33} rows={3} placeholder="Leave a comment..." onChange={(e) => setComment(e.target.value)} value={comment} />
-          <button type="submit">Submit</button>
+          <button type="submit">Comment</button>
         </>
       ) : (
         <textarea name="comment" cols={33} rows={3} placeholder="Sign in to leave a comment..." disabled />

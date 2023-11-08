@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap");
+
 *,
 *::before,
 *::after {
@@ -26,7 +28,9 @@ body {
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
-  background-color: rgb(231, 222, 231);
+  background: rgb(63, 66, 112);
+  background: linear-gradient(180deg, rgba(63, 66, 112, 0.25253851540616246) 0%, rgb(200, 189, 235) 100%) fixed;
+  font-family: "Inter", sans-serif;
 }
 
 main {

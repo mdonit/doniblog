@@ -5,7 +5,7 @@ const BlogsPage = () => {
   return (
     <>
       <div>
-        <h2>List of Blogs</h2>
+        {/* <h2>List of Blogs</h2> */}
         <Posts />
       </div>
     </>

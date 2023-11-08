@@ -24,7 +24,7 @@
   background-color: rgb(165, 165, 212);
   transition: all 0.3s ease;
 }
-.question-input button:hover {
+.question-input button:not(:disabled):hover {
   background-color: rgb(120, 106, 138);
 }
 
@@ -50,7 +50,6 @@
 
 .question-card__title {
   display: flex;
-  position: relative;
   margin-bottom: 0.5rem;
   cursor: pointer;
   user-select: none;
@@ -59,7 +58,10 @@
   margin-left: 1rem;
 }
 
-.question-card__title::before {
+.question-card__title-text {
+  position: relative;
+}
+.question-card__title-text::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -72,7 +74,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-.question-card__title:hover::before {
+.question-card__title-text:hover::before {
   visibility: visible;
   transform: scaleX(1);
   background-color: rgb(136, 78, 175);
@@ -94,7 +96,7 @@
 }
 
 .question-card--open .question-card__title {
-  color: rgb(144, 37, 158);
+  color: rgb(115, 60, 151);
 }
 .question-card--open .question-card__body {
   grid-template-rows: 1fr;
@@ -108,8 +110,7 @@
   width: 50rem;
   padding: 1rem;
   margin: 1rem 0;
-  background-color: rgb(207, 199, 218);
-  /* border-left: 2px solid rgb(81, 49, 95); */
+  background-color: rgb(188, 174, 207);
 }
 
 .comment-box__user {

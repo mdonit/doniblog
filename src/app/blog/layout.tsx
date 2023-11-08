@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function BlogsLayout({ children }: { children: React.ReactNode }) {
   return (
     <section>
-      <h1>Blogs Layout</h1>
+      <h1>Blog</h1>
       {children}
     </section>
   );

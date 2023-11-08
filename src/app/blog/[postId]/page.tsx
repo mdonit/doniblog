@@ -1,6 +1,7 @@
 import { getFormattedDate } from "@/lib/getFormattedDate";
 import { getPostData, getSortedPostsData } from "@/lib/posts";
 import { notFound } from "next/navigation";
+import styles from "@/styles/blog.module.css";
 
 export const generateStaticParams = () => {
   const posts = getSortedPostsData(); //deduped!
@@ -36,10 +37,10 @@ const Post = async ({ params }: { params: { postId: string } }) => {
   const pubDate = getFormattedDate(date);
 
   return (
-    <div>
-      <h2>{title}</h2>
-      <p>{pubDate}</p>
-      <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+    <div className={styles.blog}>
+      <h2 className={styles["blog-post__title"]}>{title}</h2>
+      <p className={styles["blog-post__date"]}>{pubDate}</p>
+      <div dangerouslySetInnerHTML={{ __html: contentHtml }} className={styles["blog-post__details"]} />
     </div>
   );
 };

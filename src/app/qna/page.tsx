@@ -28,7 +28,10 @@ const QnaPage = () => {
             <button type="submit">Submit</button>
           </form>
         ) : (
-          <input type="text" name="question" id="question" placeholder="Sign in to type a question!" style={{ padding: "5px" }} disabled />
+          <>
+            <input type="text" name="question" id="question" placeholder="Sign in to type a question!" style={{ padding: "5px" }} disabled />
+            <button disabled>Submit</button>
+          </>
         )}
       </div>
       <QuestionsSection userLoggedIn={userLoggedIn} />

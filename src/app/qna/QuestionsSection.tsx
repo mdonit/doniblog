@@ -49,7 +49,9 @@ export const QuestionsSection = ({ userLoggedIn }: { userLoggedIn: boolean }) =>
                 }}
               >
                 <BiUpArrow size={25} className={styles["question-card__arrow-icon"]} />
-                <h3>Question: {qu.data().question}</h3>
+                <h3>
+                  <span className={styles["question-card__title-text"]}>Question: {qu.data().question}</span>
+                </h3>
               </div>
               <h4>by {qu.data().displayName}</h4>
             </div>

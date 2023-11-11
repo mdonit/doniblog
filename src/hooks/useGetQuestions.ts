@@ -11,7 +11,7 @@ export const useGetQuestions = () => {
       const questionsReceived: UserQuestion[] = [];
 
       initQuestions.forEach((doc) => {
-        questionsReceived.push({ id: doc.id, displayName: doc.data().displayName, question: doc.data().question, comments: doc.data().comments });
+        questionsReceived.push({ id: doc.id, displayName: doc.data().displayName, question: doc.data().question, comments: doc.data().comments, postDate: doc.data().postDate });
       });
 
       setQuestions(questionsReceived);

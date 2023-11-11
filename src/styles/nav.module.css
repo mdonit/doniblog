@@ -66,6 +66,14 @@
   border-radius: 50%;
 }
 
+.display-name {
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 10rem;
+}
+
 .authButtons div {
   display: flex;
   gap: 1.2rem;

@@ -11,9 +11,10 @@ const CommentInput = ({ postComment, questionId, userLoggedIn }: CommentProps) =
   const [comment, setComment] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     const formatedComment: string[] = comment.trim().split("\n");
 
-    postComment(e, formatedComment, questionId);
+    formatedComment[0] !== "" && postComment(e, formatedComment, questionId);
     setComment("");
   };
 

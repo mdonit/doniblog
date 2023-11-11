@@ -10,10 +10,13 @@ type ToggleModal = {
   isLogin: boolean;
 };
 
+const nameReg = /^[A-Z]([A-Z]|[a-z]|[0-9])+_([A-Z]|[a-z]|[0-9])+$/;
+
 const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [nameInvalid, setNameInvalid] = useState<boolean>(false);
   const router = useRouter();
   const currentPath = usePathname();
 
@@ -29,6 +32,11 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
         return;
       }
     } else {
+      if (!name.match(nameReg)) {
+        setNameInvalid(true);
+        return;
+      }
+
       const { error } = await signup(name, email, password);
 
       if (error) {
@@ -50,7 +58,19 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
           {!isLogin && (
             <label htmlFor="name">
               <span>Display Name </span>
-              <input onChange={(e) => setName(e.target.value.trim())} type="text" name="name" id="name" placeholder="Example Name" required />
+              <input
+                className={nameInvalid ? styles["form--invalid"] : ""}
+                onChange={(e) => {
+                  setName(e.target.value.trim());
+                  setNameInvalid(false);
+                }}
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Example_Name09"
+                required
+              />
+              {nameInvalid && <p className={styles["error-msg"]}>Please start with a Capital and include an underscore; no whitespace allowed</p>}
             </label>
           )}
           <label htmlFor="email">

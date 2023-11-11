@@ -1,5 +1,14 @@
-.modal {
+.error-msg {
   position: absolute;
+  color: red;
+  font-size: 0.8rem;
+  top: 10rem;
+  left: 0;
+  text-align: center;
+}
+
+.modal {
+  position: fixed;
   top: 0;
   left: 0;
   display: flex;
@@ -38,6 +47,9 @@
   padding: 10px;
   border-radius: 10px;
   border: none;
+}
+.form--invalid {
+  background-color: rgb(245, 157, 157);
 }
 
 .form--auth {

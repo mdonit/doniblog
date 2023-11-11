@@ -8,6 +8,7 @@ type UserComment = {
   id?: string;
   displayName: string;
   comment: string[];
+  postDate: number;
 };
 
 type UserQuestion = {
@@ -15,4 +16,5 @@ type UserQuestion = {
   displayName: string;
   question: string;
   comments: UserComment[];
+  postDate: number;
 };

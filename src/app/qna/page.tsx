@@ -4,18 +4,20 @@ import { useGetUser } from "@/hooks/useGetUser";
 import { QuestionsSection } from "./QuestionsSection";
 import { addToQuestions } from "@/firebase/questions";
 import styles from "@/styles/qna.module.css";
+import styles2 from "@/styles/modal.module.css";
 
 const QnaPage = () => {
   const userLoggedIn = useGetUser().loggedIn;
   const userName = useGetUser().user?.displayName;
   const [userQuestion, setUserQuestion] = useState<string>("");
+  const [questionInvalid, setQuestionInvalid] = useState<boolean>(false);
 
   const postQuestion = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(userQuestion.split(" ").length);
+    // console.log(userQuestion.split(" ").length);
 
     if (userQuestion.split(" ").length > 2) userName && addToQuestions(userName, userQuestion);
-    else alert("You can't submit an empty prompt.\nType in a valid question, please!\n(3 words at least)");
+    else setQuestionInvalid(true);
   };
 
   return (
@@ -24,8 +26,24 @@ const QnaPage = () => {
       <div className={styles["question-input"]}>
         {userLoggedIn ? (
           <form onSubmit={postQuestion}>
-            <input type="text" name="question" id="question" placeholder="Type in a question!" onChange={(e) => setUserQuestion(e.target.value.trim())} style={{ padding: "5px" }} />
+            <input
+              className={questionInvalid ? styles2["form--invalid"] : ""}
+              type="text"
+              name="question"
+              id="question"
+              placeholder="Type in a question!"
+              onChange={(e) => {
+                setUserQuestion(e.target.value.trim());
+                setQuestionInvalid(false);
+              }}
+              style={{ padding: "5px" }}
+            />
             <button type="submit">Submit</button>
+            {questionInvalid && (
+              <p className={styles2["error-msg"]} style={{ top: "3rem", left: "10rem", fontSize: "1.2rem" }}>
+                3 words at least!
+              </p>
+            )}
           </form>
         ) : (
           <>

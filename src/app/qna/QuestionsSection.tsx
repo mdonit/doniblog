@@ -1,9 +1,8 @@
 import { useCollection } from "react-firebase-hooks/firestore";
 import CommentInput from "./CommentInput";
-import { useGetQuestions } from "@/hooks/useGetQuestions";
 import { useGetUser } from "@/hooks/useGetUser";
 import { addCommentToQuestion } from "@/firebase/questions";
-import { collection, getFirestore, orderBy } from "firebase/firestore";
+import { collection, getFirestore } from "firebase/firestore";
 import { app } from "@/firebase/config";
 import { Fragment, useState } from "react";
 import styles from "@/styles/qna.module.css";

@@ -1,10 +1,19 @@
-.error-msg {
+.error-msg,
+.error-msg--name-taken,
+.error-msg--email {
   position: absolute;
   color: red;
   font-size: 0.8rem;
   top: 10rem;
   left: 0;
   text-align: center;
+}
+.error-msg--name-taken {
+  left: 7.2rem;
+}
+.error-msg--email {
+  top: 16.7rem;
+  left: 7.7rem;
 }
 
 .modal {

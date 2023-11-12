@@ -4,6 +4,7 @@ import { signup } from "@/firebase/auth/signup";
 import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import styles from "@/styles/modal.module.css";
+import { addToNames, getFromNames } from "@/firebase/display-names";
 
 type ToggleModal = {
   toggleModal: () => void;
@@ -17,6 +18,8 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [nameInvalid, setNameInvalid] = useState<boolean>(false);
+  const [emailInvalid, setEmailInvalid] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<{ msg: string; css: string }>({ msg: "", css: "" });
   const router = useRouter();
   const currentPath = usePathname();
 
@@ -33,16 +36,28 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
       }
     } else {
       if (!name.match(nameReg)) {
+        setErrorMsg({ msg: "Please start with a Capital and include an underscore; no whitespace allowed", css: "error-msg" });
         setNameInvalid(true);
         return;
       }
 
-      const { error } = await signup(name, email, password);
-
-      if (error) {
-        console.log(error);
+      const nameTaken = (await getFromNames()).docs.find((n) => n.data().displayName === name);
+      if (nameTaken) {
+        setErrorMsg({ msg: "Display Name already exists", css: "error-msg--name-taken" });
+        setNameInvalid(true);
         return;
       }
+
+      const { error, errorMessage, uid } = await signup(name, email, password);
+      if (error) {
+        // console.log(error);
+
+        if (errorMessage === "Firebase: Error (auth/email-already-in-use).") {
+          setEmailInvalid(true);
+          setErrorMsg({ msg: "Email already registered", css: "error-msg--email" });
+        }
+        return;
+      } else addToNames(name, uid);
     }
 
     router.push(currentPath);
@@ -70,12 +85,24 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
                 placeholder="Example_Name09"
                 required
               />
-              {nameInvalid && <p className={styles["error-msg"]}>Please start with a Capital and include an underscore; no whitespace allowed</p>}
+              {nameInvalid && <p className={styles[errorMsg.css]}>{errorMsg.msg}</p>}
             </label>
           )}
           <label htmlFor="email">
             <span>Email </span>
-            <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" placeholder="example@gmail.com" required />
+            <input
+              className={emailInvalid ? styles["form--invalid"] : ""}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setEmailInvalid(false);
+              }}
+              type="email"
+              name="email"
+              id="email"
+              placeholder="example@gmail.com"
+              required
+            />
+            {emailInvalid && <p className={styles[errorMsg.css]}>{errorMsg.msg}</p>}
           </label>
           <label htmlFor="password">
             <span>Password </span>

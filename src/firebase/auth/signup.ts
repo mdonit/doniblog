@@ -3,20 +3,24 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const signup = async (name: string, email: string, password: string) => {
   let error: unknown = null;
+  let errorMessage: string = "";
+  let uid: string = "";
 
-  try {
-    await createUserWithEmailAndPassword(firebaseAuth, email, password).then(async (userCredential) => {
+  await createUserWithEmailAndPassword(firebaseAuth, email, password)
+    .then(async (userCredential) => {
       const user = userCredential.user;
+      uid = user.uid;
 
       await updateProfile(user, { displayName: name });
 
-      console.log(userCredential);
+      // console.log(userCredential);
+    })
+    .catch((authError: Error) => {
+      error = authError;
+      errorMessage = authError.message;
     });
-  } catch (e) {
-    error = e;
-  }
 
-  return { error };
+  return { error, errorMessage, uid };
 };
 
 export { signup };

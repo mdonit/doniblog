@@ -18,3 +18,8 @@ type UserQuestion = {
   comments: UserComment[];
   postDate: number;
 };
+
+type UserName = {
+  id: string;
+  displayName: string;
+};

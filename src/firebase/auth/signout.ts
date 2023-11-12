@@ -6,7 +6,7 @@ const signout = async () => {
 
   try {
     await signOut(firebaseAuth).then(() => {
-      console.log("sign out successful");
+      // console.log("sign out successful");
     });
   } catch (e) {
     error = e;

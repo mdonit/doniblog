@@ -11,15 +11,33 @@ type ToggleModal = {
   isLogin: boolean;
 };
 
+type InputInvalid = {
+  isInvalid: boolean;
+  message: string;
+  css: string;
+};
+
+const inputInvalidInitial: InputInvalid[] = [
+  { isInvalid: false, message: "Please start with a Capital and include an underscore; no whitespace allowed", css: "error-msg" },
+  { isInvalid: false, message: "Display Name already exists", css: "error-msg--name-taken" },
+  { isInvalid: false, message: "Email already registered", css: "error-msg--email" },
+  { isInvalid: false, message: "Passwords do not match", css: "error-msg--password" },
+  { isInvalid: false, message: "Wrong email or password", css: "error-msg--email" },
+];
+
 const nameReg = /^[A-Z]([A-Z]|[a-z]|[0-9])+_([A-Z]|[a-z]|[0-9])+$/;
 
 const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [nameInvalid, setNameInvalid] = useState<boolean>(false);
-  const [emailInvalid, setEmailInvalid] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<{ msg: string; css: string }>({ msg: "", css: "" });
+  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+
+  const [nameInvalid, setNameInvalid] = useState<InputInvalid>(inputInvalidInitial[0]);
+  const [emailInvalid, setEmailInvalid] = useState<InputInvalid>(inputInvalidInitial[2]);
+  const [passwordInvalid, setPasswordInvalid] = useState<InputInvalid>(inputInvalidInitial[3]);
+  const [loginInvalid, setLoginInvalid] = useState<InputInvalid>(inputInvalidInitial[4]);
+
   const router = useRouter();
   const currentPath = usePathname();
 
@@ -27,34 +45,40 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
     event.preventDefault();
 
     if (isLogin) {
-      const { error } = await signin(email, password);
+      const { error, errorMessage } = await signin(email, password);
 
       if (error) {
-        console.log(error, "Login Failed.");
+        // console.log(errorMessage, "Login Failed.");
+        if (errorMessage === "Firebase: Error (auth/invalid-login-credentials).") {
+          setLoginInvalid((prev) => ({ ...prev, isInvalid: true }));
+        }
 
         return;
       }
     } else {
       if (!name.match(nameReg)) {
-        setErrorMsg({ msg: "Please start with a Capital and include an underscore; no whitespace allowed", css: "error-msg" });
-        setNameInvalid(true);
+        setNameInvalid(inputInvalidInitial[0]);
+        setNameInvalid((prev) => ({ ...prev, isInvalid: true }));
         return;
       }
 
       const nameTaken = (await getFromNames()).docs.find((n) => n.data().displayName === name);
       if (nameTaken) {
-        setErrorMsg({ msg: "Display Name already exists", css: "error-msg--name-taken" });
-        setNameInvalid(true);
+        setNameInvalid(inputInvalidInitial[1]);
+        setNameInvalid((prev) => ({ ...prev, isInvalid: true }));
         return;
       }
 
+      if (password !== passwordConfirm) {
+        setPasswordInvalid((prev) => ({ ...prev, isInvalid: true }));
+        return;
+      }
       const { error, errorMessage, uid } = await signup(name, email, password);
       if (error) {
         // console.log(error);
 
         if (errorMessage === "Firebase: Error (auth/email-already-in-use).") {
-          setEmailInvalid(true);
-          setErrorMsg({ msg: "Email already registered", css: "error-msg--email" });
+          setEmailInvalid((prev) => ({ ...prev, isInvalid: true }));
         }
         return;
       } else addToNames(name, uid);
@@ -67,17 +91,17 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
 
   return (
     <div className={styles.modal}>
-      <div className={`${styles.form} ${styles["form--auth"]}`}>
-        <h3>{isLogin ? "Login" : "Sign Up"}</h3>
+      <div className={`${styles.form} ${!isLogin ? styles["form--auth-signup"] : styles["form--auth-login"]}`}>
+        <h3>{!isLogin ? "Sign Up" : "Login"}</h3>
         <form onSubmit={handleForm}>
           {!isLogin && (
             <label htmlFor="name">
               <span>Display Name </span>
               <input
-                className={nameInvalid ? styles["form--invalid"] : ""}
+                className={nameInvalid.isInvalid ? styles["form--invalid"] : ""}
                 onChange={(e) => {
                   setName(e.target.value.trim());
-                  setNameInvalid(false);
+                  setNameInvalid((prev) => ({ ...prev, isInvalid: false }));
                 }}
                 type="text"
                 name="name"
@@ -85,16 +109,16 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
                 placeholder="Example_Name09"
                 required
               />
-              {nameInvalid && <p className={styles[errorMsg.css]}>{errorMsg.msg}</p>}
+              {nameInvalid.isInvalid && <p className={styles[nameInvalid.css]}>{nameInvalid.message}</p>}
             </label>
           )}
           <label htmlFor="email">
             <span>Email </span>
             <input
-              className={emailInvalid ? styles["form--invalid"] : ""}
+              className={emailInvalid.isInvalid || loginInvalid.isInvalid ? styles["form--invalid"] : ""}
               onChange={(e) => {
                 setEmail(e.target.value);
-                setEmailInvalid(false);
+                setEmailInvalid((prev) => ({ ...prev, isInvalid: false }));
               }}
               type="email"
               name="email"
@@ -102,14 +126,44 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
               placeholder="example@gmail.com"
               required
             />
-            {emailInvalid && <p className={styles[errorMsg.css]}>{errorMsg.msg}</p>}
+            {emailInvalid.isInvalid && <p className={styles[emailInvalid.css]}>{emailInvalid.message}</p>}
           </label>
           <label htmlFor="password">
             <span>Password </span>
-            <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" placeholder="password" required />
+            <input
+              className={passwordInvalid.isInvalid || loginInvalid.isInvalid ? styles["form--invalid"] : ""}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                !isLogin ? setPasswordInvalid((prev) => ({ ...prev, isInvalid: false })) : setLoginInvalid((prev) => ({ ...prev, isInvalid: false }));
+              }}
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              required
+            />
+            {passwordInvalid.isInvalid && <p className={styles[passwordInvalid.css]}>{passwordInvalid.message}</p>}
+            {loginInvalid.isInvalid && <p className={styles[loginInvalid.css]}>{loginInvalid.message}</p>}
           </label>
+          {!isLogin && (
+            <label htmlFor="confirmPassword">
+              <span>Confirm Password </span>
+              <input
+                className={passwordInvalid.isInvalid ? styles["form--invalid"] : ""}
+                onChange={(e) => {
+                  setPasswordConfirm(e.target.value);
+                  setPasswordInvalid((prev) => ({ ...prev, isInvalid: false }));
+                }}
+                type="password"
+                name="confirmPassword"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                required
+              />
+            </label>
+          )}
           <div className={`${styles["form__buttons"]} ${styles["form__buttons--auth"]}`}>
-            <button type="submit">{isLogin ? "Log In" : "Sign Up"}</button>
+            <button type="submit">{!isLogin ? "Sign Up" : "Log In"}</button>
             <button onClick={toggleModal}>Cancel</button>
           </div>
         </form>

@@ -1,4 +1,4 @@
-.cardList {
+.card-list {
   display: grid;
   justify-items: center;
   text-align: center;
@@ -14,7 +14,7 @@
   overflow: hidden;
   position: relative;
 }
-.card_body {
+.card-body {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -22,10 +22,10 @@
   gap: 1rem;
   margin-bottom: 4rem;
 }
-.card_tech {
+.card-body__tech {
   color: rgb(86, 77, 94);
 }
-.card_links {
+.card-body__links {
   position: absolute;
   bottom: 6px;
   display: flex;
@@ -36,10 +36,10 @@
   font-weight: bold;
 }
 
-.card_links a {
+.card-body__links a {
   position: relative;
 }
-.card_links a::before {
+.card-body__links a::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -51,20 +51,20 @@
   transform: scaleX(0);
   transition: all 0.3s ease-in-out;
 }
-.card_links a:hover::before {
+.card-body__links a:hover::before {
   visibility: visible;
   transform: scaleX(1);
   background-color: rgb(163, 55, 221);
 }
 
 @media (max-width: 1024px) {
-  .cardList {
+  .card-list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 425px) {
-  .cardList {
+  .card-list {
     grid-template-columns: 1fr;
   }
 }

@@ -1,10 +1,11 @@
 .error-msg,
 .error-msg--name-taken,
-.error-msg--email {
+.error-msg--email,
+.error-msg--password {
   position: absolute;
   color: red;
   font-size: 0.8rem;
-  top: 10rem;
+  top: 10.2rem;
   left: 0;
   text-align: center;
 }
@@ -13,6 +14,10 @@
 }
 .error-msg--email {
   top: 16.7rem;
+  left: 7.7rem;
+}
+.error-msg--password {
+  top: 30rem;
   left: 7.7rem;
 }
 
@@ -61,9 +66,13 @@
   background-color: rgb(245, 157, 157);
 }
 
-.form--auth {
-  height: 500px;
+.form--auth-signup {
+  height: 600px;
 }
+.form--auth-login {
+  height: 400px;
+}
+
 .form--confirm {
   height: 200px;
 }

@@ -14,16 +14,16 @@ const AuthOptions = ({ toggleAuthModal, toggleConfirmModal }: ToggleModal) => {
       {authUser.loggedIn ? (
         <div>
           <span className={styles["display-name"]}>{authUser.user?.displayName}</span>
-          <span className={styles.authButton} onClick={toggleConfirmModal}>
+          <span className={styles["auth-button"]} onClick={toggleConfirmModal}>
             Sign Out
           </span>
         </div>
       ) : (
         <div>
-          <span className={styles.authButton} onClick={() => toggleAuthModal(false)}>
+          <span className={styles["auth-button"]} onClick={() => toggleAuthModal(false)}>
             Sign Up
           </span>
-          <span className={styles.authButton} onClick={() => toggleAuthModal(true)}>
+          <span className={styles["auth-button"]} onClick={() => toggleAuthModal(true)}>
             Log in
           </span>
         </div>

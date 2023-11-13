@@ -22,17 +22,17 @@
   gap: 3rem;
 }
 
-.active {
+.nav-link--active {
   color: white;
 }
 
 .nav ul li,
-.authButton,
-.active {
+.auth-button,
+.nav-link--active {
   position: relative;
 }
 .nav ul li::before,
-.authButton::before {
+.auth-button::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -45,14 +45,14 @@
   transition: all 0.3s ease-in-out;
 }
 
-.nav ul li:not(.active):hover::before,
-.authButton:hover::before {
+.nav ul li:not(.nav-link--active):hover::before,
+.auth-button:hover::before {
   visibility: visible;
   transform: scaleX(1);
   background-color: rgb(200, 146, 230);
 }
 
-.active::after {
+.nav-link--active::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -62,7 +62,7 @@
   background-color: rgb(200, 146, 230);
 }
 
-.pfp {
+.nav-icon {
   border-radius: 50%;
 }
 
@@ -74,11 +74,11 @@
   width: 10rem;
 }
 
-.authButtons div {
+.auth-buttons div {
   display: flex;
   gap: 1.2rem;
 }
-.authButton {
+.auth-button {
   cursor: pointer;
 }
 

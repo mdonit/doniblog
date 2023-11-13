@@ -44,7 +44,7 @@ const PortfolioPage = () => {
   return (
     <div>
       <h2>Webdev Works</h2>
-      <div className={styles.cardList}>
+      <div className={styles["card-list"]}>
         {portfolioInfo.map((po) => (
           <div key={po.id} className={styles.card}>
             {po.imgSrc ? (
@@ -52,11 +52,11 @@ const PortfolioPage = () => {
             ) : (
               <Image priority src="/Noimage.jpg" alt={`${po.title} image`} width={264} height={159} draggable="false" onContextMenu={(e) => e.preventDefault()} />
             )}
-            <div className={styles.card_body}>
+            <div className={styles["card-body"]}>
               <h3>{po.title}</h3>
               <p>{po.description}</p>
-              <p className={styles.card_tech}>{po.technologies.join(", ")}</p>
-              <div className={styles.card_links}>
+              <p className={styles["card-body__tech"]}>{po.technologies.join(", ")}</p>
+              <div className={styles["card-body__links"]}>
                 {po.directLink || po.githubLink ? (
                   <>
                     {po.directLink && (

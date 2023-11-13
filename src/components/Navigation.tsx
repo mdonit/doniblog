@@ -35,23 +35,23 @@ const Navigation = () => {
       {modalConfirmVisible && <ConfirmModal text={"sign out"} func={userSignOut} toggleConfirmModal={toggleConfirmModal} />}
       <nav className={styles.nav}>
         <div>
-          <Image priority src="/den.jpg" alt="me" width="50" height="50" className={styles.pfp} draggable="false" onContextMenu={(e) => e.preventDefault()} />
+          <Image priority src="/den.jpg" alt="me" width="50" height="50" className={styles["nav-icon"]} draggable="false" onContextMenu={(e) => e.preventDefault()} />
         </div>
         <ul>
-          <li className={`link ${pathname === "/" ? styles.active : ""}`}>
+          <li className={`link ${pathname === "/" ? styles["nav-link--active"] : ""}`}>
             <Link href="/">Home</Link>
           </li>
-          <li className={`link ${pathname.startsWith("/portfolio-categories") ? styles.active : ""}`}>
+          <li className={`link ${pathname.startsWith("/portfolio-categories") ? styles["nav-link--active"] : ""}`}>
             <Link href="/portfolio-categories">Portfolio</Link>
           </li>
-          <li className={`link ${pathname.startsWith("/blog") ? styles.active : ""}`}>
+          <li className={`link ${pathname.startsWith("/blog") ? styles["nav-link--active"] : ""}`}>
             <Link href="/blog">Blog</Link>
           </li>
-          <li className={`link ${pathname.startsWith("/qna") ? styles.active : ""}`}>
+          <li className={`link ${pathname.startsWith("/qna") ? styles["nav-link--active"] : ""}`}>
             <Link href="/qna">Q&A</Link>
           </li>
         </ul>
-        <div className={styles.authButtons}>
+        <div className={styles["auth-buttons"]}>
           <AuthOptions toggleAuthModal={toggleAuthModal} toggleConfirmModal={toggleConfirmModal} />
         </div>
       </nav>

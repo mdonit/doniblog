@@ -14,11 +14,11 @@
   gap: 1rem;
 }
 
-.pos {
+.profession {
   color: rgb(88, 60, 88);
   text-transform: uppercase;
 }
 
-.pfp {
+.profile-img {
   border-radius: 50%;
 }

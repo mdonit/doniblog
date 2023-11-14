@@ -18,14 +18,15 @@ type InputInvalid = {
 };
 
 const inputInvalidInitial: InputInvalid[] = [
-  { isInvalid: false, message: "Please start with a Capital and include an underscore; no whitespace allowed", css: "error-msg" },
+  { isInvalid: false, message: "Start with a Capital; underscore between; no whitespace/other special characters", css: "error-msg" },
   { isInvalid: false, message: "Display Name already exists", css: "error-msg--name-taken" },
   { isInvalid: false, message: "Email already registered", css: "error-msg--email" },
-  { isInvalid: false, message: "Passwords do not match", css: "error-msg--password" },
+  { isInvalid: false, message: "Passwords do not match", css: "error-msg--password-match" },
   { isInvalid: false, message: "Wrong email or password", css: "error-msg--email" },
+  { isInvalid: false, message: "Password should be at least 6 characters", css: "error-msg--password-weak" },
 ];
 
-const nameReg = /^[A-Z]([A-Z]|[a-z]|[0-9])+_([A-Z]|[a-z]|[0-9])+$/;
+const nameReg = /^[A-Z](([A-Z]|[a-z]|[0-9])+)?(_([A-Z]|[a-z]|[0-9])+)+$/;
 
 const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
   const [name, setName] = useState<string>("");
@@ -49,7 +50,7 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
 
       if (error) {
         // console.log(errorMessage, "Login Failed.");
-        if (errorMessage === "Firebase: Error (auth/invalid-login-credentials).") {
+        if (errorMessage === "(auth/invalid-login-credentials).") {
           setLoginInvalid((prev) => ({ ...prev, isInvalid: true }));
         }
 
@@ -70,16 +71,22 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
       }
 
       if (password !== passwordConfirm) {
+        setPasswordInvalid(inputInvalidInitial[3]);
         setPasswordInvalid((prev) => ({ ...prev, isInvalid: true }));
         return;
       }
       const { error, errorMessage, uid } = await signup(name, email, password);
       if (error) {
-        // console.log(error);
+        console.log("ÚJ ERROR: ", error);
 
-        if (errorMessage === "Firebase: Error (auth/email-already-in-use).") {
+        if (errorMessage === "(auth/email-already-in-use).") {
           setEmailInvalid((prev) => ({ ...prev, isInvalid: true }));
         }
+        if (errorMessage === "(auth/weak-password).") {
+          setPasswordInvalid(inputInvalidInitial[5]);
+          setPasswordInvalid((prev) => ({ ...prev, isInvalid: true }));
+        }
+
         return;
       } else addToNames(name, uid);
     }

@@ -17,7 +17,7 @@ const signup = async (name: string, email: string, password: string) => {
     })
     .catch((authError: Error) => {
       error = authError;
-      errorMessage = authError.message;
+      errorMessage = authError.message.substring(authError.message.lastIndexOf("("));
     });
 
   return { error, errorMessage, uid };

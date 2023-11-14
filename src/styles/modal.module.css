@@ -1,7 +1,8 @@
 .error-msg,
 .error-msg--name-taken,
 .error-msg--email,
-.error-msg--password {
+.error-msg--password-match,
+.error-msg--password-weak {
   position: absolute;
   color: red;
   font-size: 0.8rem;
@@ -16,9 +17,13 @@
   top: 16.7rem;
   left: 7.7rem;
 }
-.error-msg--password {
+.error-msg--password-match {
   top: 30rem;
   left: 7.7rem;
+}
+.error-msg--password-weak {
+  top: 30rem;
+  left: 4.5rem;
 }
 
 .modal {

@@ -7,7 +7,7 @@
 }
 .footer-top {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
 }
 .footer-bottom {
   font-size: 0.8rem;
@@ -32,4 +32,18 @@
   visibility: visible;
   transform: scaleX(1);
   background-color: rgb(200, 146, 230);
+}
+
+@media (max-width: 425px) {
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .footer-top a {
+    font-weight: bold;
+  }
+  .footer-bottom {
+    text-align: center;
+  }
 }

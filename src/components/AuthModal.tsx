@@ -77,8 +77,6 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
       }
       const { error, errorMessage, uid } = await signup(name, email, password);
       if (error) {
-        console.log("ÚJ ERROR: ", error);
-
         if (errorMessage === "(auth/email-already-in-use).") {
           setEmailInvalid((prev) => ({ ...prev, isInvalid: true }));
         }

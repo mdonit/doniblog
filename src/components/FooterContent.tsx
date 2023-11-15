@@ -6,7 +6,6 @@ const FooterContent = () => {
     <div className={styles.footer}>
       <div className={styles["footer-top"]}>
         <span>Made with Next.js</span>
-        <span> | </span>
         <span>
           <a href="https://github.com/mdonit/doniblog" target="_blank">
             Github Link

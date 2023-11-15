@@ -8,7 +8,7 @@
 }
 
 .card {
-  width: 264px;
+  max-width: 264px;
   background-color: rgb(240, 231, 255);
   border-radius: 10px;
   overflow: hidden;
@@ -60,6 +60,13 @@
 @media (max-width: 1024px) {
   .card-list {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .card-body__links {
+    gap: 0.8rem;
+    font-size: 1.2rem;
   }
 }
 

@@ -58,6 +58,10 @@ footer p {
   text-align: center;
 }
 
+.page-title {
+  text-align: center;
+}
+
 /* TODO: Later*/
 @media (prefers-color-scheme: dark) {
 }

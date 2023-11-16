@@ -53,7 +53,7 @@ const Navigation = () => {
       {modalConfirmVisible && <ConfirmModal text={"sign out"} func={userSignOut} toggleConfirmModal={toggleConfirmModal} />}
       <nav className={styles.nav}>
         <div>
-          <Image priority src="/den.jpg" alt="me" width="50" height="50" className={styles["nav-icon"]} draggable="false" onContextMenu={(e) => e.preventDefault()} />
+          <Image priority src="/den.jpg" alt="me" width="50" height="50" className={styles["nav__site-icon"]} draggable="false" onContextMenu={(e) => e.preventDefault()} />
         </div>
         <div className={`${styles["nav--mobile"]} ${openMobileLinks && styles["nav--mobile--open"]}`}>
           <BiUpArrow size={45} className={styles["nav--mobile__icon"]} onClick={() => mobileNavHandler(true)} />
@@ -107,7 +107,7 @@ const Navigation = () => {
         </div>
         <div className={`${styles["nav--mobile__auth"]} ${openMobileAuth && styles["nav--mobile--window-open"]}`}>
           <div className={styles["auth-buttons"]}>
-            <AuthOptions toggleAuthModal={toggleAuthModal} toggleConfirmModal={toggleConfirmModal} />
+            <AuthOptions toggleAuthModal={toggleAuthModal} toggleConfirmModal={toggleConfirmModal} mobileNavHandler={mobileNavHandler} />
           </div>
         </div>
       </nav>

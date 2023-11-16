@@ -22,7 +22,7 @@ const QnaPage = () => {
 
   return (
     <div>
-      <h2>Ask any questions!</h2>
+      <h2 className="page-title">Ask any questions!</h2>
       <div className={styles["question-input"]}>
         {userLoggedIn ? (
           <form onSubmit={postQuestion}>

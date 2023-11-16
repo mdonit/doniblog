@@ -18,7 +18,7 @@ type InputInvalid = {
 };
 
 const inputInvalidInitial: InputInvalid[] = [
-  { isInvalid: false, message: "Start with a Capital; underscore between; no whitespace/other special characters", css: "error-msg" },
+  { isInvalid: false, message: "Start with Uppercase; underscore between; no whitespace/other special characters", css: "error-msg" },
   { isInvalid: false, message: "Display Name already exists", css: "error-msg--name-taken" },
   { isInvalid: false, message: "Email already registered", css: "error-msg--email" },
   { isInvalid: false, message: "Passwords do not match", css: "error-msg--password-match" },

@@ -4,9 +4,10 @@ import styles from "@/styles/nav.module.css";
 type ToggleModal = {
   toggleAuthModal: (login?: boolean) => void;
   toggleConfirmModal: () => void;
+  mobileNavHandler: (isLinks: boolean) => void;
 };
 
-const AuthOptions = ({ toggleAuthModal, toggleConfirmModal }: ToggleModal) => {
+const AuthOptions = ({ toggleAuthModal, toggleConfirmModal, mobileNavHandler }: ToggleModal) => {
   const authUser = useGetUser();
 
   return (
@@ -14,7 +15,13 @@ const AuthOptions = ({ toggleAuthModal, toggleConfirmModal }: ToggleModal) => {
       {authUser.loggedIn ? (
         <div>
           <span className={styles["display-name"]}>{authUser.user?.displayName}</span>
-          <span className={styles["auth-button"]} onClick={toggleConfirmModal}>
+          <span
+            className={styles["auth-button"]}
+            onClick={() => {
+              mobileNavHandler(false);
+              toggleConfirmModal();
+            }}
+          >
             Sign Out
           </span>
         </div>

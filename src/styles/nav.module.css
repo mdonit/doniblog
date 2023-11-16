@@ -75,8 +75,10 @@
   background-color: rgb(200, 146, 230);
 }
 
-.nav-icon {
+.nav__site-icon {
+  position: relative;
   border-radius: 50%;
+  z-index: 2;
 }
 
 .display-name {
@@ -148,10 +150,6 @@
     border-radius: 0 0 10px 10px;
     background-color: rgb(31, 23, 36);
   }
-  .nav--mobile__auth {
-    top: 0;
-    left: 29rem;
-  }
 
   .nav--mobile--window-open {
     top: 1.4rem;
@@ -168,5 +166,26 @@
   }
   .nav--mobile--open .nav--mobile__icon {
     transform: rotate(0deg);
+  }
+}
+
+@media (max-width: 425px) {
+  .nav--mobile__links,
+  .nav--mobile__auth {
+    left: 3.3rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .nav--mobile__links,
+  .nav--mobile__auth {
+    left: 1.7rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .nav--mobile__links,
+  .nav--mobile__auth {
+    left: 0;
   }
 }

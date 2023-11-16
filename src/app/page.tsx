@@ -13,8 +13,9 @@ const Home = () => {
           <p>This is my personal website, made with Next.js; features:</p>
           <ul>
             <li>- Next.js App routing</li>
-            <li>- Firebase storage and authentication</li>
-            <li>- Blog posts with markdown and gray-matter</li>
+            <li>- Firebase storage for Q&A</li>
+            <li>- Firebase authentication; custom display name</li>
+            <li>- Static blog posts with markdown and gray-matter</li>
           </ul>
         </div>
       </div>

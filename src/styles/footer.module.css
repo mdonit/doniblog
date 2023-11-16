@@ -40,9 +40,6 @@
     align-items: center;
     gap: 1rem;
   }
-  .footer-top a {
-    font-weight: bold;
-  }
   .footer-bottom {
     text-align: center;
   }

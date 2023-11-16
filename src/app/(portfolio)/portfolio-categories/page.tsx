@@ -43,7 +43,7 @@ const portfolioInfo: PortfolioInfo[] = [
 const PortfolioPage = () => {
   return (
     <div>
-      <h2>Webdev Works</h2>
+      <h2 className="page-title">Webdev Works</h2>
       <div className={styles["card-list"]}>
         {portfolioInfo.map((po) => (
           <div key={po.id} className={styles.card}>

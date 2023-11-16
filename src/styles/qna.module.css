@@ -115,7 +115,7 @@
 
 .comment-box {
   border-radius: 10px;
-  width: 50rem;
+  /* width: 50rem; */
   padding: 1rem;
   margin: 1rem 0;
   background-color: rgb(188, 174, 207);
@@ -169,5 +169,30 @@
 @media (max-width: 768px) {
   .question-list {
     grid-template-columns: 1fr;
+  }
+
+  .question-card,
+  .question-card--open {
+    width: 40rem;
+  }
+}
+@media (max-width: 425px) {
+  .question-input input {
+    width: 17rem;
+  }
+
+  .question-card,
+  .question-card--open {
+    width: 18rem;
+  }
+}
+@media (max-width: 375px) {
+  .question-input input {
+    width: 13rem;
+  }
+}
+@media (max-width: 320px) {
+  .question-input input {
+    width: 11rem;
   }
 }

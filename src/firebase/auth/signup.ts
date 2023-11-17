@@ -1,5 +1,5 @@
 import { firebaseAuth } from "@/firebase/config";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 
 const signup = async (name: string, email: string, password: string) => {
   let error: unknown = null;
@@ -12,14 +12,11 @@ const signup = async (name: string, email: string, password: string) => {
       uid = user.uid;
 
       await updateProfile(user, { displayName: name });
-
-      // console.log(userCredential);
     })
     .catch((authError: Error) => {
       error = authError;
       errorMessage = authError.message.substring(authError.message.lastIndexOf("("));
     });
-
   return { error, errorMessage, uid };
 };
 

@@ -8,13 +8,13 @@ import styles2 from "@/styles/modal.module.css";
 
 const QnaPage = () => {
   const userLoggedIn = useGetUser().loggedIn;
+  const userVerified = useGetUser().user?.emailVerified;
   const userName = useGetUser().user?.displayName;
   const [userQuestion, setUserQuestion] = useState<string>("");
   const [questionInvalid, setQuestionInvalid] = useState<boolean>(false);
 
   const postQuestion = (e: React.FormEvent) => {
     e.preventDefault();
-    // console.log(userQuestion.split(" ").length);
 
     if (userQuestion.split(" ").length > 2) userName && addToQuestions(userName, userQuestion);
     else setQuestionInvalid(true);
@@ -24,7 +24,7 @@ const QnaPage = () => {
     <div>
       <h2 className="page-title">Ask any questions!</h2>
       <div className={styles["question-input"]}>
-        {userLoggedIn ? (
+        {userLoggedIn && userVerified ? (
           <form onSubmit={postQuestion}>
             <input
               className={questionInvalid ? styles2["form--invalid"] : ""}
@@ -47,12 +47,12 @@ const QnaPage = () => {
           </form>
         ) : (
           <>
-            <input type="text" name="question" id="question" placeholder="Sign in to type a question!" style={{ padding: "5px" }} disabled />
+            <input type="text" name="question" id="question" placeholder="Sign in/verify email to type a question!" style={{ padding: "5px" }} disabled />
             <button disabled>Submit</button>
           </>
         )}
       </div>
-      <QuestionsSection userLoggedIn={userLoggedIn} />
+      <QuestionsSection userLoggedIn={userLoggedIn} userVerified={userVerified} />
     </div>
   );
 };

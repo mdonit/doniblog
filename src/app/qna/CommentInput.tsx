@@ -5,9 +5,10 @@ type CommentProps = {
   postComment: (e: React.FormEvent, comment: string[], id: string | undefined) => void;
   questionId: string | undefined;
   userLoggedIn: boolean;
+  userVerified: boolean | undefined;
 };
 
-const CommentInput = ({ postComment, questionId, userLoggedIn }: CommentProps) => {
+const CommentInput = ({ postComment, questionId, userLoggedIn, userVerified }: CommentProps) => {
   const [comment, setComment] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -20,13 +21,13 @@ const CommentInput = ({ postComment, questionId, userLoggedIn }: CommentProps) =
 
   return (
     <form onSubmit={handleSubmit} className={styles["comment-input"]}>
-      {userLoggedIn ? (
+      {userLoggedIn && userVerified ? (
         <>
           <textarea name="comment" cols={33} rows={3} placeholder="Leave a comment..." onChange={(e) => setComment(e.target.value)} value={comment} />
           <button type="submit">Comment</button>
         </>
       ) : (
-        <textarea name="comment" cols={33} rows={3} placeholder="Sign in to leave a comment..." disabled />
+        <textarea name="comment" cols={33} rows={3} placeholder="Sign in/verify email to leave a comment..." disabled />
       )}
     </form>
   );

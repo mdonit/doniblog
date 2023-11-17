@@ -1,6 +1,7 @@
 "use client";
 import { signin } from "@/firebase/auth/signin";
 import { signup } from "@/firebase/auth/signup";
+import { signout } from "@/firebase/auth/signout";
 import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import styles from "@/styles/modal.module.css";
@@ -49,7 +50,6 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
       const { error, errorMessage } = await signin(email, password);
 
       if (error) {
-        // console.log(errorMessage, "Login Failed.");
         if (errorMessage === "(auth/invalid-login-credentials).") {
           setLoginInvalid((prev) => ({ ...prev, isInvalid: true }));
         }
@@ -76,6 +76,7 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
         return;
       }
       const { error, errorMessage, uid } = await signup(name, email, password);
+
       if (error) {
         if (errorMessage === "(auth/email-already-in-use).") {
           setEmailInvalid((prev) => ({ ...prev, isInvalid: true }));
@@ -86,7 +87,9 @@ const AuthModal = ({ toggleModal, isLogin }: ToggleModal) => {
         }
 
         return;
-      } else addToNames(name, uid);
+      } else {
+        addToNames(name, uid);
+      }
     }
 
     router.push(currentPath);

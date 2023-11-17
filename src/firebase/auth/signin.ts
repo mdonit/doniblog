@@ -7,7 +7,7 @@ const signin = async (email: string, password: string) => {
 
   await signInWithEmailAndPassword(firebaseAuth, email, password)
     .then((userCredential) => {
-      // console.log(userCredential);
+      console.log(userCredential);
     })
     .catch((authError: Error) => {
       error = authError;

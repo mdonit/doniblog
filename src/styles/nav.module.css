@@ -39,13 +39,32 @@
   color: white;
 }
 
+.verify-button {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  border-radius: 0 0 10px 10px;
+  background-color: rgb(31, 23, 36);
+  user-select: none;
+}
+.verify-button span {
+  position: relative;
+  cursor: pointer;
+}
+
 .nav ul li,
 .auth-button,
 .nav-link--active {
   position: relative;
 }
 .nav ul li::before,
-.auth-button::before {
+.auth-button::before,
+.verify-button span::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -59,7 +78,8 @@
 }
 
 .nav ul li:not(.nav-link--active):hover::before,
-.auth-button:hover::before {
+.auth-button:hover::before,
+.verify-button span:hover::before {
   visibility: visible;
   transform: scaleX(1);
   background-color: rgb(200, 146, 230);
@@ -161,11 +181,17 @@
     display: flex;
     flex-direction: column;
     font-size: 1.5rem;
+    text-align: center;
     align-items: center;
     overflow: hidden;
   }
   .nav--mobile--open .nav--mobile__icon {
     transform: rotate(0deg);
+  }
+
+  .verify-button {
+    position: relative;
+    top: 0.5rem;
   }
 }
 

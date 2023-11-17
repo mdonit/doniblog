@@ -10,7 +10,7 @@ import { BiUpArrow } from "react-icons/bi";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import moment from "moment";
 
-export const QuestionsSection = ({ userLoggedIn }: { userLoggedIn: boolean }) => {
+export const QuestionsSection = ({ userLoggedIn, userVerified }: { userLoggedIn: boolean; userVerified: boolean | undefined }) => {
   const [value, loading, error] = useCollection(collection(getFirestore(app), "questions"), {
     snapshotListenOptions: { includeMetadataChanges: true },
   });
@@ -108,7 +108,7 @@ export const QuestionsSection = ({ userLoggedIn }: { userLoggedIn: boolean }) =>
                       </li>
                     )}
                   </ul>
-                  <CommentInput postComment={postComment} questionId={qu.id} userLoggedIn={userLoggedIn} />
+                  <CommentInput postComment={postComment} questionId={qu.id} userLoggedIn={userLoggedIn} userVerified={userVerified} />
                 </div>
               </div>
             </div>

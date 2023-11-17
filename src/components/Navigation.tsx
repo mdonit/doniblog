@@ -14,6 +14,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 const Navigation = () => {
   const [modalAuthVisible, setModalAuthVisible] = useState<boolean>(false);
   const [modalConfirmVisible, setModalConfirmVisible] = useState<boolean>(false);
+  const [modalVerifyVisible, setModalVerifyVisible] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
   const [openMobileLinks, setOpenMobileLinks] = useState<boolean>(false);
@@ -28,11 +29,18 @@ const Navigation = () => {
   const toggleConfirmModal = () => {
     setModalConfirmVisible((prev) => !prev);
   };
+  const toggleVerifyModal = () => {
+    setModalVerifyVisible((prev) => !prev);
+  };
+
+  const sendVerifyEmail = () => {
+    setModalVerifyVisible(true);
+    setOpenMobileAuth(false);
+  };
 
   const userSignOut = () => {
     signout();
     setModalConfirmVisible(false);
-    if (openMobileAuth) setOpenMobileAuth(false);
   };
 
   const pathname = usePathname();
@@ -49,8 +57,11 @@ const Navigation = () => {
 
   return (
     <>
+      {modalVerifyVisible && (
+        <ConfirmModal yesOrNo={false} text={"Verification email has been sent; Don't forget to refresh the page after verification is complete!"} toggleModal={toggleVerifyModal} />
+      )}
+      {modalConfirmVisible && <ConfirmModal yesOrNo={true} text={"Are you sure you want to sign out?"} func={userSignOut} toggleModal={toggleConfirmModal} />}
       {modalAuthVisible && <AuthModal toggleModal={toggleAuthModal} isLogin={isLogin} />}
-      {modalConfirmVisible && <ConfirmModal text={"sign out"} func={userSignOut} toggleConfirmModal={toggleConfirmModal} />}
       <nav className={styles.nav}>
         <div>
           <Image priority src="/den.jpg" alt="me" width="50" height="50" className={styles["nav__site-icon"]} draggable="false" onContextMenu={(e) => e.preventDefault()} />
@@ -107,7 +118,7 @@ const Navigation = () => {
         </div>
         <div className={`${styles["nav--mobile__auth"]} ${openMobileAuth && styles["nav--mobile--window-open"]}`}>
           <div className={styles["auth-buttons"]}>
-            <AuthOptions toggleAuthModal={toggleAuthModal} toggleConfirmModal={toggleConfirmModal} mobileNavHandler={mobileNavHandler} />
+            <AuthOptions toggleAuthModal={toggleAuthModal} toggleConfirmModal={toggleConfirmModal} mobileNavHandler={mobileNavHandler} sendVerifyEmail={sendVerifyEmail} />
           </div>
         </div>
       </nav>
